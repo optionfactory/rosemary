@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dialect xmlns="http://www.thymeleaf.org/extras/dialect"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.thymeleaf.org/extras/dialect
+	                    http://www.thymeleaf.org/xsd/thymeleaf-extras-dialect-2.1.xsd"
+         prefix="rosemary"
+         namespace-uri="http://www.optionfactory.net/rosemary/versioned-resource"
+         namespace-strict="false"
+         class="net.optionfactory.rosemary.VersionedResourceDialect">
+>
+    <attribute-processor
+            name="append"
+            class="net.optionfactory.rosemary.AppendVersionToResource">
+        <documentation
+                reference="Append version query parameter with defined value"/>
+    </attribute-processor>
+</dialect>
