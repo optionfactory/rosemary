@@ -1,5 +1,6 @@
 package net.optionfactory.rosemary;
 
+import com.sun.tools.javac.resources.version;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.thymeleaf.context.ITemplateContext;
@@ -13,6 +14,7 @@ import org.thymeleaf.templatemode.TemplateMode;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Supplier;
 
 public class AppendVersionToResource extends AbstractAttributeTagProcessor {
     private static final Logger logger = LoggerFactory.getLogger(AppendVersionToResource.class);
@@ -20,11 +22,11 @@ public class AppendVersionToResource extends AbstractAttributeTagProcessor {
     private static final String ATTR_NAME = "append";
     private static final int PRECEDENCE = 10000;
     private static final List<String> attributeNames = Arrays.asList("src", "href");
-    private final String version;
+    private final Supplier<String> versionSupplier;
 
     public AppendVersionToResource(
             final String dialectPrefix,
-            final String version
+            final Supplier<String> versionSupplier
     ) {
         super(
                 TemplateMode.HTML,
@@ -36,7 +38,7 @@ public class AppendVersionToResource extends AbstractAttributeTagProcessor {
                 PRECEDENCE,
                 true // remove matched attribute afterwards
         );
-        this.version = version;
+        this.versionSupplier = versionSupplier;
     }
 
     @Override
@@ -64,8 +66,8 @@ public class AppendVersionToResource extends AbstractAttributeTagProcessor {
                 return;
             }
             final String versionedContent = content.contains("?")
-                    ? String.format("%s&version=%s", content, version)
-                    : String.format("%s?version=%s", content, version);
+                    ? String.format("%s&version=%s", content, versionSupplier.get())
+                    : String.format("%s?version=%s", content, versionSupplier.get());
             structureHandler.setAttribute(attribute.getAttributeCompleteName(), versionedContent, attribute.getValueQuotes());
         } catch (Exception ex) {
             logger.error(String.format("Error while processing tag %s", tag.getElementCompleteName()), ex);
