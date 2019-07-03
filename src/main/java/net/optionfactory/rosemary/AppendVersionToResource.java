@@ -1,6 +1,5 @@
 package net.optionfactory.rosemary;
 
-import com.sun.tools.javac.resources.version;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.thymeleaf.context.ITemplateContext;
