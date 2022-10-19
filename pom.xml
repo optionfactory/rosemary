@@ -37,7 +37,7 @@
     </scm>
     <properties>
         <thymeleaf.version>3.0.11.RELEASE</thymeleaf.version>
-        <jackson.version>2.11.0</jackson.version>
+        <jackson.version>2.13.4.1</jackson.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
