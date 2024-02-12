@@ -8,8 +8,6 @@ import org.thymeleaf.context.IContext;
 
 public class VersionedResourceDialectTest {
 
-    private static final String VERSION = "1";
-
     public TemplateEngine createEngine() {
         final TemplateEngine engine = new TemplateEngine();
         engine.addDialect(new VersionedResourceDialect("1"));
@@ -75,7 +73,7 @@ public class VersionedResourceDialectTest {
         final String got = engine.process(template, context);
         Assert.assertEquals(expected, got);
     }
-    
+
     @Test
     public void ifHrefIsEmptyDoNothing() {
         final TemplateEngine engine = createEngine();
@@ -85,7 +83,7 @@ public class VersionedResourceDialectTest {
         final String got = engine.process(template, context);
         Assert.assertEquals(expected, got);
     }
-    
+
     @Test
     public void ifVersionAlreadyPresentDoNothing() {
         final TemplateEngine engine = createEngine();
